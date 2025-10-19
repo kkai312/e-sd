@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Байланыс</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background: #f4f4f4;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      max-width: 400px;
+      width: 90%;
+      text-align: center;
+    }
+    h1 {
+      color: #333;
+    }
+    .btn {
+      display: block;
+      margin: 15px 0;
+      padding: 14px;
+      font-size: 16px;
+      font-weight: bold;
+      text-decoration: none;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .whatsapp { background: #25D366; }
+    .call { background: #4CAF50; }
+    .vcard { background: #2196F3; }
+    .btn:hover { opacity: 0.9; }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Байланыс</h1>
+
+    <!-- WhatsApp -->
+    <a href="https://wa.me/77771234567?text=Сәлеметсіз%20бе!" 
+       class="btn whatsapp" target="_blank">
+      WhatsApp арқылы жазу
+    </a>
+
+    <!-- Қоңырау шалу -->
+    <a href="tel:+77771234567" class="btn call">
+      Қоңырау шалу
+    </a>
+
+    <!-- Контакт жүктеу -->
+    <button class="btn vcard" onclick="downloadVcard()">
+      Контактты сақтау
+    </button>
+  </div>
+
+  <script>
+    function downloadVcard() {
+      const vcardData = `
+BEGIN:VCARD
+VERSION:3.0
+FN:Асан Нурбол
+ORG:My Company
+TEL;TYPE=CELL:+77771234567
+EMAIL:info@example.com
+URL:https://example.com
+END:VCARD
+`.trim();
+
+      const blob = new Blob([vcardData], { type: 'text/vcard;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'contact.vcf';
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    }
+  </script>
+
+</body>
+</html>
